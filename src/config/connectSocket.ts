@@ -1,11 +1,17 @@
-import { connection, IMessage, server, request } from 'websocket';
+import {
+  connection,
+  IMessage,
+  server,
+  request,
+} from 'websocket';
 import { Server } from 'http';
+import { Schema } from 'mongoose';
 import jwt from 'jsonwebtoken';
+
 import { Token } from '../interfaces';
 
 import models from '../models';
 import sendPush from '../utils/sendPush';
-import { Schema } from 'mongoose';
 
 interface IMsg {
   text: string;

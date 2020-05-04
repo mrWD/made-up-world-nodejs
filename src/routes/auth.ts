@@ -4,7 +4,9 @@ import jwt from 'jsonwebtoken';
 
 import { Token } from '../interfaces';
 
+import { VAPIDKeyPublic } from '../config/connectWebPush';
 import validator from '../utils/validator';
+
 import models from '../models';
 
 const { SECRET_KEY = 'jwtsecret' } = process.env;
@@ -85,7 +87,7 @@ router.post('/signin', async (req, res) => {
         {
           userId: user._id,
           login: user.login,
-          vapidKey: process.env.VAPID_KEY_PUBLIC,
+          vapidKey: VAPIDKeyPublic,
         },
         SECRET_KEY,
       );

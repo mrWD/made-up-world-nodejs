@@ -3,7 +3,6 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import session from 'express-session';
 import dotenv from 'dotenv';
-import path from 'path';
 
 import config from './src/config';
 import routes from './src/routes';
@@ -24,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/uploads/:year/:month/:day/:name', (req, res) => {
+app.get(`/api/${process.env.DESTINATION}/:year/:month/:day/:name`, (req, res) => {
   const {
     year,
     month,

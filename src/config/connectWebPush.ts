@@ -3,10 +3,16 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const { publicKey, privateKey } = webPush.generateVAPIDKeys();
+
 webPush.setVapidDetails(
   process.env.URL || '',
-  process.env.VAPID_KEY_PUBLIC || '',
-  process.env.VAPID_KEY_PRIVATE || '',
+  publicKey,
+  privateKey,
 );
+
+export {
+  publicKey as VAPIDKeyPublic,
+};
 
 export default webPush;
