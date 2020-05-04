@@ -18,14 +18,14 @@ const sendPush = async (userId: UserId, message: Message) => {
     notifiableList = Array.isArray(userId)
       ? await models.Push.find({ owner: { $in : userId  } })
       : await models.Push.find({ owner: userId });
-    
+
     const options = { TTL: 6000 };
     const payload = JSON.stringify({
       title: message.title,
       body: message.body,
       icon: 'https://cdn1.iconfinder.com/data/icons/books-23/100/book_read_magazine-01-512.png',
     });
-    
+
     notifiableList[0] && notifiableList.forEach((item) => {
       const subscribtion = {
         endpoint: item.endpoint,
@@ -34,7 +34,7 @@ const sendPush = async (userId: UserId, message: Message) => {
           auth: item.auth,
         },
       };
-  
+
       webPush.sendNotification(subscribtion, payload, options);
     });
   } catch (err) {

@@ -70,19 +70,23 @@ router.post('/signin', async (req, res) => {
 
     if (!user) {
       return res.status(400).json({
-        error: 'Login or password are wrong!',
+        error: 'Login or password is wrong!',
       });
     }
 
     bcrypt.compare(password, user.password, (err: Error, result: boolean) => {
       if (!result) {
         return res.status(400).json({
-          error: 'Login or password are wrong!',
+          error: 'Login or password is wrong!',
         });
       }
 
       const token = jwt.sign(
-        { userId: user._id, login: user.login },
+        {
+          userId: user._id,
+          login: user.login,
+          vapidKey: process.env.VAPID_KEY_PUBLIC,
+        },
         SECRET_KEY,
       );
 

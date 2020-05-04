@@ -4,9 +4,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 webPush.setVapidDetails(
-  'http://localhost:5000/',
-  process.env.VAPID_PUBLIC_KEY || '',
-  process.env.VAPID_PRIVATE_KEY || '',
+  process.env.URL || '',
+  process.env.VAPID_KEY_PUBLIC || '',
+  process.env.VAPID_KEY_PRIVATE || '',
 );
 
 export default webPush;

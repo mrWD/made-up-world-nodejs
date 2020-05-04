@@ -23,7 +23,10 @@ router.post('/user-info', async (req, res) => {
       });
     }
 
-    res.status(200).json(user);
+    res.status(200).json({
+      ...user,
+      destination: process.env.DESTINATION,
+    });
   } catch (err) {
     console.error(err);
 
@@ -56,8 +59,9 @@ router.post('/all', async (req, res) => {
 
     res.status(200).json({
       userList: userList.slice(firstIndex, firstIndex + perPage),
-      page,
+      destination: process.env.DESTINATION,
       pages: Math.ceil(userList.length / perPage),
+      page,
     });
   } catch (err) {
     console.error(err);

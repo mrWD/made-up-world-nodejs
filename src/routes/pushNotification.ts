@@ -1,15 +1,10 @@
-import webPush from '../config/connectWebPush';
 import express from 'express';
 import jwt from 'jsonwebtoken';
 
+import webPush from '../config/connectWebPush';
+
 import models from '../models';
 import { Token } from '../interfaces';
-
-webPush.setVapidDetails(
-  'http://localhost:5000/',
-  process.env.VAPID_PUBLIC_KEY || '',
-  process.env.VAPID_PRIVATE_KEY || '',
-);
 
 const { SECRET_KEY = 'jwtsecret' } = process.env;
 const TTL: 60 = 60;
