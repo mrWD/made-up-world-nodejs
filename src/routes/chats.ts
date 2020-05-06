@@ -28,8 +28,10 @@ router.post('/new', async (req, res) => {
   try {
     const decoded = await <Token>jwt
       .verify(req.headers.authorization as string, process.env.SECRET_KEY as string);
-    const queryParams = { members: [decoded.userId, req.body.recipientID] };
-    const chat = await models.Chat.findOne(queryParams) || await models.Chat.create(queryParams);
+    const queryParams = { members: { $in: [decoded.userId, req.body.recipientID] } };
+    const chat = await models.Chat.findOne(queryParams)
+      || await models.Chat.create({ members: [decoded.userId, req.body.recipientID] });
+
     const populatedChat = await chat.populate('members').execPopulate();
 
     res.status(200).json(populatedChat);

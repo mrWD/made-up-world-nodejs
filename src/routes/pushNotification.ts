@@ -29,21 +29,10 @@ router.post('/subscribe', async (req, res) => {
       icon: 'https://cdn1.iconfinder.com/data/icons/books-23/100/book_read_magazine-01-512.png',
     });
 
-    console.log('test 1');
-
-    webPush.sendNotification(subscribtion, payload, options).then(function() {
-      console.log('Send welcome push notification');
-      console.log('subscribe');
-      return;
-    }).catch(err => {
-      console.error('Unable to send welcome push notification', err );
-      console.log('subscription not possible');
-      return;
-    });
-    console.log('test 2');
+    webPush.sendNotification(subscribtion, payload, options);
 
     if (!notification) {
-      return res.status(400).json({
+      return res.status(200).json({
         error: 'There is not subscribers on this notification!',
       });
     }
