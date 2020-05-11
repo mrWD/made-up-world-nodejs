@@ -21,22 +21,26 @@ router.post('/all', async (req, res) => {
     headers: { authorization },
   } = req;
 
-  console.log('req.body', req.body);
-  console.log('req.headers', req.headers);
-
   const firstIndex = perPage * page - perPage;
   let decoded = null;
   let isPublished = true;
 
   try {
+    console.log('start try');
+
     if (authorization) {
+      console.log('start authorization');
       decoded = await <Token>jwt.verify(authorization as string, SECRET_KEY);
       isPublished = !authorization || !owner || owner !== decoded?.login;
     }
 
-    const users = await models.User.find({ ...(owner && { login: new RegExp(owner) }) });
-    console.log(users);
+    console.log('end authorization');
 
+    console.log('start users');
+    const users = await models.User.find({ ...(owner && { login: new RegExp(owner) }) });
+    console.log('end users', users);
+
+    console.log('start storyList');
     const storyList = await models.Page
       .find({
         ...(owner && users[0] && { $or: users.map((user) => ({ owner: user.id })) }),
@@ -47,7 +51,7 @@ router.post('/all', async (req, res) => {
       .sort(sortBy)
       .populate('owner', { login: 1 });
 
-    console.log(storyList);
+    console.log('end storyList', storyList);
 
     res.status(200).json({
       storyList: storyList.slice(firstIndex, firstIndex + perPage),
