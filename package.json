@@ -6,8 +6,9 @@
   "license": "MIT",
   "scripts": {
     "build-ts": "tsc",
-    "postinstall": "npm run build-ts",
-    "start": "npm run serve",
+    "postinstall": "yarn build-ts",
+    "copy": "cp views dist",
+    "start": "yarn copy && yarn serve",
     "serve": "node dist/server.js",
     "test": "mocha 'tests/unit/**/*.ts'",
     "watch-node": "nodemon dist/server.js",
