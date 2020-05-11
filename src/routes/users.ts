@@ -12,7 +12,7 @@ const PER_PAGE = 10;
 
 const router = express.Router();
 
-router.post('/user-info', config.connectCors, async (req, res) => {
+router.post('/user-info', async (req, res) => {
   try {
     const user = await models.User.findOne({ login: req.body.login })
       .populate('followers', { login: 1 })
@@ -37,7 +37,7 @@ router.post('/user-info', config.connectCors, async (req, res) => {
   }
 });
 
-router.post('/all', config.connectCors, async (req, res) => {
+router.post('/all', async (req, res) => {
   const {
     page = 1,
     perPage = PER_PAGE,
@@ -73,7 +73,7 @@ router.post('/all', config.connectCors, async (req, res) => {
   }
 });
 
-router.post('/follow', config.connectCors, async (req, res) => {
+router.post('/follow', async (req, res) => {
   try {
     const decoded = await <Token>jwt.verify(req.headers.authorization as string, SECRET_KEY);
     const followedUser = await models.User.findOneAndUpdate(
@@ -105,7 +105,7 @@ router.post('/follow', config.connectCors, async (req, res) => {
   }
 });
 
-router.post('/unfollow', config.connectCors, async (req, res) => {
+router.post('/unfollow', async (req, res) => {
   try {
     const decoded = await <Token>jwt.verify(req.headers.authorization as string, SECRET_KEY);
     const user = await models.User.findOneAndUpdate(

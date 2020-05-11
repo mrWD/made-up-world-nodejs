@@ -11,7 +11,7 @@ const TTL: 60 = 60;
 
 const router = express.Router();
 
-router.post('/subscribe', config.connectCors, async (req, res) => {
+router.post('/subscribe', async (req, res) => {
   try {
     const decoded = await <Token>jwt.verify(req.headers.authorization as string, SECRET_KEY);
     const notification = await models.Push.create({
@@ -47,7 +47,7 @@ router.post('/subscribe', config.connectCors, async (req, res) => {
   }
 });
 
-router.post('/unsubscribe', config.connectCors, async (req, res) => {
+router.post('/unsubscribe', async (req, res) => {
   try {
     await models.Push.findOneAndRemove({
       endpoint: req.body.endpoint,

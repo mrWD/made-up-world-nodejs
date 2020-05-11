@@ -69,7 +69,7 @@ const upload = multer({
   }
 }).single('file');
 
-router.post('/image', config.connectCors, (req, res) => {
+router.post('/image', (req, res) => {
   upload(req, res, (err) => {
     if (err && err.code === 'LIMIT_FILE_SIZE') {
       return res.status(401).json({
