@@ -9,7 +9,6 @@ branches:
 install:
   - yarn
 script:
-  - yarn lint
   - yarn test
 deploy:
   provider: heroku
