@@ -7,8 +7,8 @@
   "scripts": {
     "tsc": "tsc",
     "test": "mocha 'tests/unit/**/*.ts'",
-    "build": "babel index.ts --out-file dist/index.js",
-    "dev": "nodemon index.ts"
+    "build": "babel server.ts --out-file dist/index.js",
+    "dev": "nodemon server.ts"
   },
   "dependencies": {
     "@babel/cli": "^7.8.4",
@@ -55,7 +55,6 @@
     "nodemon": "^2.0.2"
   },
   "engines": {
-    "node": ">=12.6.1",
-    "yarn": "1.x"
+    "node": ">=12.6.1"
   }
 }
