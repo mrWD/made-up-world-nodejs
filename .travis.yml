@@ -6,6 +6,11 @@ dist: xenial
 branches:
   only:
     - master
+install:
+  - yarn
+script:
+  - yarn lint
+  - yarn test
 deploy:
   provider: heroku
   strategy: api
