@@ -5,6 +5,7 @@
   "author": "<lvigtor@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "build-ts": "tsc",
     "postinstall": "yarn build-ts",
     "start": "yarn serve",
     "serve": "node dist/server.js",
