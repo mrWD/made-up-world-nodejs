@@ -4,8 +4,8 @@ import cors from 'cors';
 import session from 'express-session';
 import dotenv from 'dotenv';
 
-import config from './src/config';
-import routes from './src/routes';
+import config from './config';
+import routes from './routes';
 
 dotenv.config();
 
