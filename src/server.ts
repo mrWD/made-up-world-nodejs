@@ -10,22 +10,23 @@ import routes from './routes';
 dotenv.config();
 
 const app = express();
-// const whitelist = [
-//   'http://localhost:5000/',
-//   'http://localhost:8080/',
-//   'http://192.168.0.48:8080/',
-//   'https://made-up-world-vuejs.herokuapp.com/',
-//   'https://made-up-world-nodejs.herokuapp.com/',
-// ];
-// const corsOptions = {
-//   origin: (origin: any, callback: any) => {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-// };
+const whitelist = [
+  'http://localhost:5000/',
+  'http://192.168.0.48:5000/',
+  'http://localhost:8080/',
+  'http://192.168.0.48:8080/',
+  'https://made-up-world-vuejs.herokuapp.com/',
+  'https://made-up-world-nodejs.herokuapp.com/',
+];
+const corsOptions = {
+  origin: (origin: any, callback: any) => {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
 
 app.use(
   session({
@@ -37,9 +38,9 @@ app.use(
 );
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
-app.get(`/api/${process.env.DESTINATION}/:year/:month/:day/:name`, (req, res) => {
+app.get(`/api/${process.env.DESTINATION}/:year/:month/:day/:name`, cors(corsOptions), (req, res) => {
   const {
     year,
     month,
@@ -52,13 +53,13 @@ app.get(`/api/${process.env.DESTINATION}/:year/:month/:day/:name`, (req, res) =>
     .sendFile(`${__dirname}/${process.env.DESTINATION}/${imgRoute}`)
 });
 
-app.use('/api/auth', routes.auth);
-app.use('/api/users', routes.users);
-app.use('/api/editing', routes.editing);
-app.use('/api/reading', routes.reading);
-app.use('/api/push', routes.pushNotification);
-app.use('/api/upload', routes.upload);
-app.use('/api/chats', routes.chats);
+app.use('/api/auth', cors(corsOptions), routes.auth);
+app.use('/api/users', cors(corsOptions), routes.users);
+app.use('/api/editing', cors(corsOptions), routes.editing);
+app.use('/api/reading', cors(corsOptions), routes.reading);
+app.use('/api/push', cors(corsOptions), routes.pushNotification);
+app.use('/api/upload', cors(corsOptions), routes.upload);
+app.use('/api/chats', cors(corsOptions), routes.chats);
 
 if (process.env.NODE_ENV === 'pruduction') {
   // app.get('/', (req, res) => res.send('API is running!'));
