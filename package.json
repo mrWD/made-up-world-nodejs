@@ -5,10 +5,10 @@
   "author": "<lvigtor@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build-ts": "tsc",
+    "copy": "cp -r views/* dist/",
+    "build-ts": "tsc && yarn copy",
     "postinstall": "yarn build-ts",
-    "copy": "cp views dist",
-    "start": "yarn copy && yarn serve",
+    "start": "yarn serve",
     "serve": "node dist/server.js",
     "test": "mocha 'tests/unit/**/*.ts'",
     "watch-node": "nodemon dist/server.js",
