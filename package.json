@@ -51,6 +51,9 @@
     "multer": "^1.4.2",
     "sharp": "^0.25.2",
     "ts-node": "^8.6.2",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.3.0",
     "typescript": "^3.8.3",
     "web-push": "^3.4.3",
     "websocket": "^1.0.31"
