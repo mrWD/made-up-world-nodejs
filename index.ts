@@ -45,7 +45,7 @@ app.use('/api/upload', routes.upload);
 app.use('/api/chats', routes.chats);
 
 if (process.env.NODE_ENV === 'pruduction') {
-  app.get('/', (req, res) => res.sendFile('./views/index.html'));
+  app.get('/', (req, res) => res.sendFile(`${__dirname}/views/index.html`));
   // app.use(express.static(`${__dirname}/public/`));
 
   // app.get('/uploads', (req, res) => res.sendFile(path.join(__dirname, process.env.DESTINATION || '')));
