@@ -9,11 +9,13 @@ import routes from './routes';
 
 dotenv.config();
 
-const whitelist = [
-  'http://example1.com',
-  'https://made-up-world-vuejs.herokuapp.com/',
-];
 const app = express();
+const whitelist = [
+  'http://localhost:8080/',
+  'http://192.168.0.48:8080/',
+  'https://made-up-world-vuejs.herokuapp.com/',
+  'https://made-up-world-nodejs.herokuapp.com/',
+];
 const corsOptions = {
   origin: (origin: any, callback: any) => {
     if (whitelist.indexOf(origin) !== -1) {
