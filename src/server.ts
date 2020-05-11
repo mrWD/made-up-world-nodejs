@@ -10,21 +10,22 @@ import routes from './routes';
 dotenv.config();
 
 const app = express();
-const whitelist = [
-  'http://localhost:8080/',
-  'http://192.168.0.48:8080/',
-  'https://made-up-world-vuejs.herokuapp.com/',
-  'https://made-up-world-nodejs.herokuapp.com/',
-];
-const corsOptions = {
-  origin: (origin: any, callback: any) => {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-};
+// const whitelist = [
+//   'http://localhost:5000/',
+//   'http://localhost:8080/',
+//   'http://192.168.0.48:8080/',
+//   'https://made-up-world-vuejs.herokuapp.com/',
+//   'https://made-up-world-nodejs.herokuapp.com/',
+// ];
+// const corsOptions = {
+//   origin: (origin: any, callback: any) => {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+// };
 
 app.use(
   session({
@@ -36,7 +37,7 @@ app.use(
 );
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 app.get(`/api/${process.env.DESTINATION}/:year/:month/:day/:name`, (req, res) => {
   const {
