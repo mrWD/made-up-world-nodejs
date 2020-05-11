@@ -5,6 +5,11 @@ dotenv.config();
 
 const { publicKey, privateKey } = webPush.generateVAPIDKeys();
 
+console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+console.log('publicKey', publicKey);
+console.log('privateKey', privateKey);
+console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+
 webPush.setVapidDetails(
   process.env.URL || '',
   publicKey,
