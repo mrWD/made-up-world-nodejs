@@ -7,9 +7,9 @@
   "scripts": {
     "tsc": "tsc",
     "test": "mocha 'tests/unit/**/*.ts'",
-    "build": "babel server.ts --out-file dist/index.js",
-    "start": "node dist/index.js",
-    "dev": "nodemon server.ts"
+    "build": "babel index.ts --out-file server.js",
+    "start": "node server.js",
+    "dev": "nodemon index.ts"
   },
   "dependencies": {
     "@babel/cli": "^7.8.4",
