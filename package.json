@@ -7,10 +7,14 @@
   "scripts": {
     "tsc": "tsc",
     "test": "mocha 'tests/unit/**/*.ts'",
-    "start": "node index.ts",
-    "dev": "nodemon index.ts"
+    "start": "babel index.ts --out-file dist/index.js",
+    "dev": "nodemon --exec index.ts"
   },
   "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.6",
     "@types/bcrypt-nodejs": "^0.0.31",
     "@types/chai": "^4.2.11",
     "@types/cors": "^2.8.6",
