@@ -5,7 +5,7 @@
   "author": "<lvigtor@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "copy": "cp -r views/* dist/",
+    "copy": "mkdir -p dist/views && cp -r views/* dist/views/",
     "build-ts": "tsc && yarn copy",
     "postinstall": "yarn build-ts",
     "start": "yarn serve",
