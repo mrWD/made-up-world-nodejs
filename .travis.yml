@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+- 12
+os: linux
+dist: xenial
+branches:
+  only:
+  - master
+deploy:
+  provider: heroku
+  api_key:
+    secure: aZ/XGmkVzH5WknsJd+Ua/Wi3PLH1hODXCWkM1D19yKKaLhyoX66E9LCCpG0S1pvaEUnp9GrvhnqGJOlrx/pzwMVA6kHxfL6FQ8NR19Y83dJyA+054lDqqjmjr+GXCjphEdemDBiFUbrz1X/bYOQNrYIdgioTZIIX94EjvbxS3EcKRkWZDCeFNRhBbtF60x1RoGjtvY6f8SOrnRhu1I9C5pAEgqoyK8FT9xoyQHPcP4/sUq3kEFQRJx34q8ExoMolYhrLmK1vrXVehdgJGOl/oQP2pgTlgyr8kQIo2DWdIJya6+Pnst/Hmk5WUiIim/W75O3Ifh+2Jrps2if6PS7VtQsdZCzoKX5jQbIs2Vdh84lBobfZugYoLsl7xulXNWJw0IJRylWKpRcx9Ztad6dH0odZudhwixb5cA23+uKFP/HWxnvZhwi7K5MySX/xY+S6lISeG3A/Dv8VU3p4x+N5efKnFTlNjxze3sdUdWdRLAsdfrIKnSWyPGFSrDPleEwS8Z0RysUP2VZOxH0sHEkHE8F5Qkd/TigY8/y1/kU3xVymJzqBLLkWSFCUSUr/2y87mxGDcOcjI4zRlAmjmjmQdE2eFGsStoGimzASQ4Bl0GiKdqXirNWv6C8pF2NSpR3Sw97LGfchU986+qQjws0PMyH7zJ9Izuh1JBI03ttJukM=
+  app: made-up-world-vuejs
+  on:
+    repo: mrWD/made-up-world-vuejs
