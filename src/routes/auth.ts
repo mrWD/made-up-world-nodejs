@@ -7,7 +7,6 @@ import { Token } from '../interfaces';
 import { VAPIDKeyPublic } from '../config/connectWebPush';
 import validator from '../utils/validator';
 
-import config from '../config';
 import models from '../models';
 
 const { SECRET_KEY = 'jwtsecret' } = process.env;

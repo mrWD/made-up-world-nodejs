@@ -4,7 +4,6 @@ import path from 'path';
 import mkdirp from 'mkdirp';
 import sharp from 'sharp';
 
-import config from '../config';
 import models from '../models';
 
 const { DESTINATION = 'uploads' } = process.env;

@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 
 import { Token } from '../interfaces';
 
-import config from '../config';
 import models from '../models';
 import sendPush from '../utils/sendPush';
 
