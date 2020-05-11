@@ -2,6 +2,6 @@ node_modules
 
 server/public/
 uploads/
-build/
+dist/
 
 .env

@@ -1,17 +1,19 @@
 {
   "name": "made-up-world",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "./index.ts",
   "author": "<lvigtor@gmail.com>",
   "license": "MIT",
   "scripts": {
     "tsc": "tsc",
     "test": "mocha 'tests/unit/**/*.ts'",
-    "clean": "rm -rf build && mkdir build",
-    "build-babel": "babel -d ./build ./index.ts -s",
-    "build": "npm run clean && npm run build-babel",
-    "start": "npm run build && node ./build/index.js",
-    "dev": "nodemon index.ts"
+    "build-ts": "tsc",
+    "postinstall": "yarn build-ts",
+    "start": "yarn serve",
+    "serve": "node dist/server.js",
+    "watch-node": "nodemon dist/server.js",
+    "watch-ts": "tsc -w",
+    "dev": "nodemon ./index.ts"
   },
   "dependencies": {
     "@babel/cli": "^7.8.4",
