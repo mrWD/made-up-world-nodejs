@@ -9,7 +9,20 @@ import routes from './routes';
 
 dotenv.config();
 
+const whitelist = [
+  'http://example1.com',
+  'https://made-up-world-vuejs.herokuapp.com/',
+];
 const app = express();
+const corsOptions = {
+  origin: (origin: any, callback: any) => {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
 
 app.use(
   session({
@@ -21,7 +34,7 @@ app.use(
 );
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.get(`/api/${process.env.DESTINATION}/:year/:month/:day/:name`, (req, res) => {
   const {
@@ -45,8 +58,8 @@ app.use('/api/upload', routes.upload);
 app.use('/api/chats', routes.chats);
 
 if (process.env.NODE_ENV === 'pruduction') {
-  app.get('/', (req, res) => res.send('API is running!'));
-  // app.get('/', (req, res) => res.sendFile(`${__dirname}/views/index.html`));
+  // app.get('/', (req, res) => res.send('API is running!'));
+  app.get('/', (req, res) => res.sendFile(`${__dirname}/views/index.html`));
   // app.use(express.static(`${__dirname}/public/`));
 
   // app.get('/uploads', (req, res) => res.sendFile(path.join(__dirname, process.env.DESTINATION || '')));
