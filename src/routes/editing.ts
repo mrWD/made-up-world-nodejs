@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import { Token } from '../interfaces';
 
+import config from '../config';
 import models from '../models';
 
 import transliter from '../utils/transliter';
@@ -18,7 +19,7 @@ const { SECRET_KEY = 'jwtsecret' } = process.env;
 
 const router = express.Router();
 
-router.post('/all', async (req, res) => {
+router.post('/all', config.connectCors, async (req, res) => {
   const {
     body: { storyURL },
     headers: { authorization },
@@ -47,7 +48,7 @@ router.post('/all', async (req, res) => {
   }
 });
 
-router.post('/save-story', async (req, res) => {
+router.post('/save-story', config.connectCors, async (req, res) => {
   try {
     const isFirstChanged = req.body.changes.some(({ isFirst }: Changes) => isFirst);
     const decoded = await <Token>jwt.verify(req.headers.authorization as string, SECRET_KEY);
@@ -74,7 +75,7 @@ router.post('/save-story', async (req, res) => {
   }
 });
 
-router.post('/save', async (req, res) => {
+router.post('/save', config.connectCors, async (req, res) => {
   const {
     body: {
       pageId,
@@ -159,7 +160,7 @@ router.post('/save', async (req, res) => {
   }
 });
 
-router.post('/edit', async (req, res) => {
+router.post('/edit', config.connectCors, async (req, res) => {
   const {
     body: { pageId },
     headers: { authorization },
@@ -188,7 +189,7 @@ router.post('/edit', async (req, res) => {
   }
 });
 
-router.post('/remove-page', async (req, res) => {
+router.post('/remove-page', config.connectCors, async (req, res) => {
   const {
     body: { pageId },
     headers: { authorization },
@@ -212,7 +213,7 @@ router.post('/remove-page', async (req, res) => {
   }
 });
 
-router.post('/remove-story', async (req, res) => {
+router.post('/remove-story', config.connectCors, async (req, res) => {
   const {
     body: { storyURL },
     headers: { authorization },
@@ -233,7 +234,7 @@ router.post('/remove-story', async (req, res) => {
   }
 });
 
-router.post('/publish', async (req, res) => {
+router.post('/publish', config.connectCors, async (req, res) => {
   const {
     body: { storyURL },
     headers: { authorization },
@@ -279,7 +280,7 @@ router.post('/publish', async (req, res) => {
   }
 });
 
-router.post('/unpublish', async (req, res) => {
+router.post('/unpublish', config.connectCors, async (req, res) => {
   const {
     body: { storyURL },
     headers: { authorization },

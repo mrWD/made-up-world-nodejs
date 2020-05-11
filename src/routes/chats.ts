@@ -2,11 +2,13 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 
 import { Token } from '../interfaces';
+
+import config from '../config';
 import models from '../models';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', config.connectCors, async (req, res) => {
   try {
     const decoded = await <Token>jwt
       .verify(req.headers.authorization as string, process.env.SECRET_KEY as string);
@@ -24,7 +26,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/new', async (req, res) => {
+router.post('/new', config.connectCors, async (req, res) => {
   try {
     const decoded = await <Token>jwt
       .verify(req.headers.authorization as string, process.env.SECRET_KEY as string);
@@ -44,7 +46,7 @@ router.post('/new', async (req, res) => {
   }
 });
 
-router.post('/messages', async (req, res) => {
+router.post('/messages', config.connectCors, async (req, res) => {
   try {
     const decoded = await <Token>jwt
       .verify(req.headers.authorization as string, process.env.SECRET_KEY as string);

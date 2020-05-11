@@ -7,13 +7,14 @@ import { Token } from '../interfaces';
 import { VAPIDKeyPublic } from '../config/connectWebPush';
 import validator from '../utils/validator';
 
+import config from '../config';
 import models from '../models';
 
 const { SECRET_KEY = 'jwtsecret' } = process.env;
 
 const router = express.Router();
 
-router.post('/signup', async (req, res) => {
+router.post('/signup', config.connectCors, async (req, res) => {
   const { login, password, passwordConfirm } = req.body;
   const logAndPassValidation = validator.validateLoginPassword(login, password);
   const passwordConfirmValidation = validator.validatePassConfirm(password, passwordConfirm);
@@ -58,7 +59,7 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-router.post('/signin', async (req, res) => {
+router.post('/signin', config.connectCors, async (req, res) => {
   const { login, password } = req.body;
 
   if (!login || !password) {
@@ -109,7 +110,7 @@ router.post('/signin', async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
+router.get('/', config.connectCors, async (req, res) => {
   try {
     const decoded = await <Token>jwt.verify(req.headers.authorization as string, SECRET_KEY);
     const user = await models.User.findById(decoded.userId)
@@ -133,7 +134,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/logout', (req, res) => {
+router.get('/logout', config.connectCors, (req, res) => {
   if (req.session) {
     req.session.destroy(() => {
       res.redirect('/');

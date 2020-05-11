@@ -4,6 +4,7 @@ import path from 'path';
 import mkdirp from 'mkdirp';
 import sharp from 'sharp';
 
+import config from '../config';
 import models from '../models';
 
 const { DESTINATION = 'uploads' } = process.env;
@@ -68,7 +69,7 @@ const upload = multer({
   }
 }).single('file');
 
-router.post('/image', (req, res) => {
+router.post('/image', config.connectCors, (req, res) => {
   upload(req, res, (err) => {
     if (err && err.code === 'LIMIT_FILE_SIZE') {
       return res.status(401).json({

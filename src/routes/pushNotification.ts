@@ -1,17 +1,17 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 
-import webPush from '../config/connectWebPush';
-
-import models from '../models';
 import { Token } from '../interfaces';
+
+import config from '../config';
+import models from '../models';
 
 const { SECRET_KEY = 'jwtsecret' } = process.env;
 const TTL: 60 = 60;
 
 const router = express.Router();
 
-router.post('/subscribe', async (req, res) => {
+router.post('/subscribe', config.connectCors, async (req, res) => {
   try {
     const decoded = await <Token>jwt.verify(req.headers.authorization as string, SECRET_KEY);
     const notification = await models.Push.create({
@@ -29,7 +29,7 @@ router.post('/subscribe', async (req, res) => {
       icon: 'https://cdn1.iconfinder.com/data/icons/books-23/100/book_read_magazine-01-512.png',
     });
 
-    webPush.sendNotification(subscribtion, payload, options);
+    config.connectWebPush.sendNotification(subscribtion, payload, options);
 
     if (!notification) {
       return res.status(200).json({
@@ -47,7 +47,7 @@ router.post('/subscribe', async (req, res) => {
   }
 });
 
-router.post('/unsubscribe', async (req, res) => {
+router.post('/unsubscribe', config.connectCors, async (req, res) => {
   try {
     await models.Push.findOneAndRemove({
       endpoint: req.body.endpoint,

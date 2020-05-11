@@ -3,13 +3,14 @@ import jwt from 'jsonwebtoken';
 
 import { Token } from '../interfaces';
 
+import config from '../config';
 import models from '../models';
 
 const { SECRET_KEY = 'jwtsecret' } = process.env;
 const PER_PAGE: 10 = 10;
 const router = express.Router();
 
-router.post('/all', async (req, res) => {
+router.post('/all', config.connectCors, async (req, res) => {
   const {
     body: {
       page = 1,
@@ -56,7 +57,7 @@ router.post('/all', async (req, res) => {
   }
 });
 
-router.post('/page', async (req, res) => {
+router.post('/page', config.connectCors, async (req, res) => {
   const { storyURL, pageId } = req.body;
   const queryConditions = {
     ...(!pageId && { isFirst: !pageId }),
