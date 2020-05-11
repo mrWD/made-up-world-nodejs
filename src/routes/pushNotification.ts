@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import { Token } from '../interfaces';
 
+import config from '../config';
 import models from '../models';
 
 const { SECRET_KEY = 'jwtsecret' } = process.env;
