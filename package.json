@@ -8,7 +8,7 @@
     "tsc": "tsc",
     "test": "mocha 'tests/unit/**/*.ts'",
     "build": "babel index.ts --out-file dist/index.js",
-    "start": "yarn build",
+    "start": "build",
     "dev": "nodemon index.ts"
   },
   "dependencies": {
@@ -56,6 +56,7 @@
     "nodemon": "^2.0.2"
   },
   "engines": {
-    "node": ">=12.6.1"
+    "node": ">=12.6.1",
+    "yarn": ">=1.22.4"
   }
 }
