@@ -7,9 +7,10 @@
   "scripts": {
     "tsc": "tsc",
     "test": "mocha 'tests/unit/**/*.ts'",
-    "babel-node": "babel-node",
-    "build": "NODE_ENV=production babel index.ts --out-file server.js",
-    "start": "node server.js",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s",
+    "build": "npm run clean && npm run build-babel",
+    "start": "npm run build && node ./build/index.js",
     "dev": "nodemon index.ts"
   },
   "dependencies": {
