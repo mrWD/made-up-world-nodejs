@@ -63,7 +63,7 @@ app.use('/api/chats', cors(corsOptions), routes.chats);
 
 if (process.env.NODE_ENV === 'pruduction') {
   // app.get('/', (req, res) => res.send('API is running!'));
-  app.get('/', (req, res) => res.sendFile(`${__dirname}/views/index.html`));
+  app.get('/', cors(corsOptions), (req, res) => res.sendFile(`${__dirname}/views/index.html`));
   // app.use(express.static(`${__dirname}/public/`));
 
   // app.get('/uploads', (req, res) => res.sendFile(path.join(__dirname, process.env.DESTINATION || '')));
