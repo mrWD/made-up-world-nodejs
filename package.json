@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build-ts": "tsc",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "postinstall": "yarn build-ts",
     "start": "yarn serve",
     "serve": "node dist/server.js",
