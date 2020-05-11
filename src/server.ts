@@ -40,7 +40,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 
-app.get(`/api/${process.env.DESTINATION}/:year/:month/:day/:name`, cors(corsOptions), (req, res) => {
+app.get(`/api/${process.env.DESTINATION}/:year/:month/:day/:name`, (req, res) => {
   const {
     year,
     month,
@@ -53,17 +53,17 @@ app.get(`/api/${process.env.DESTINATION}/:year/:month/:day/:name`, cors(corsOpti
     .sendFile(`${__dirname}/${process.env.DESTINATION}/${imgRoute}`)
 });
 
-app.use('/api/auth', cors(corsOptions), routes.auth);
-app.use('/api/users', cors(corsOptions), routes.users);
-app.use('/api/editing', cors(corsOptions), routes.editing);
-app.use('/api/reading', cors(corsOptions), routes.reading);
-app.use('/api/push', cors(corsOptions), routes.pushNotification);
-app.use('/api/upload', cors(corsOptions), routes.upload);
-app.use('/api/chats', cors(corsOptions), routes.chats);
+app.use('/api/auth', routes.auth);
+app.use('/api/users', routes.users);
+app.use('/api/editing', routes.editing);
+app.use('/api/reading', routes.reading);
+app.use('/api/push', routes.pushNotification);
+app.use('/api/upload', routes.upload);
+app.use('/api/chats', routes.chats);
 
 if (process.env.NODE_ENV === 'pruduction') {
   // app.get('/', (req, res) => res.send('API is running!'));
-  app.get('/', cors(corsOptions), (req, res) => res.sendFile(`${__dirname}/views/index.html`));
+  app.get('/', (req, res) => res.sendFile(`${__dirname}/views/index.html`));
   // app.use(express.static(`${__dirname}/public/`));
 
   // app.get('/uploads', (req, res) => res.sendFile(path.join(__dirname, process.env.DESTINATION || '')));
