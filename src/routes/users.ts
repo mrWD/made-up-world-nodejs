@@ -90,11 +90,11 @@ router.post('/follow', async (req, res) => {
       });
     }
 
+    res.status(200).json('success');
+
     sendPush(followedUser.id, {
       title: `${user.login} started following you!`,
     });
-
-    res.status(200).json('success');
   } catch (err) {
     console.error(err);
 

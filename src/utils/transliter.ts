@@ -34,8 +34,10 @@ const mapRusToEngSymbols: { [key: string]: string } = {
 };
 
 export const getSlugString = (str: string): string => {
-  return Array.from(str).reduce((result: string, char: string): string => {
-    if (result[result.length - 1] === '-' && char === ' ' || char === '-') return result;
+  return Array.from(str || '').reduce((result: string, char: string): string => {
+    if (result[result.length - 1] === '-' && char === ' ' || char === '-') {
+      return result;
+    }
 
     let nextChar = mapRusToEngSymbols[char] || '';
 
