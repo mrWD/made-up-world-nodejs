@@ -89,13 +89,12 @@ router.post('/save', async (req, res) => {
       authorization,
     },
   } = req;
-  const newStoryURL = `${transliter.getSlugString(title)}-${Date.now().toString(36)}`;
   const editParams = {
     ...(title && { title }),
     ...(body && { body }),
     ...(options && { options }),
     ...(nextPages && { nextPages }),
-    storyURL: storyURL || newStoryURL,
+    storyURL: storyURL || `${transliter.getSlugString(title)}-${Date.now().toString(36)}`,
     isFirst: !storyURL || isFirst,
   };
 
