@@ -24,7 +24,7 @@ router.post('/user-info', async (req, res) => {
     }
 
     res.status(200).json({
-      ...user,
+      user,
       destination: process.env.DESTINATION,
     });
   } catch (err) {

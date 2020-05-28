@@ -1,4 +1,4 @@
-import cors from 'cors';
+import cors, { CorsOptions } from 'cors';
 
 const whitelist = [
   'http://localhost:5000',
@@ -8,11 +8,10 @@ const whitelist = [
   'https://made-up-world-vuejs.herokuapp.com',
   'https://made-up-world-nodejs.herokuapp.com',
 ];
-const corsOptions = {
-  origin: (origin: any, callback: any) => {
-    console.log(origin);
 
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
+const corsOptions: CorsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));

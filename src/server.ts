@@ -24,7 +24,6 @@ app.use(config.connectCors);
 
 app.get(
   `/api/${process.env.DESTINATION}/:year/:month/:day/:name`,
-  config.connectCors,
   (req, res) => {
     const {
       year,
@@ -33,9 +32,12 @@ app.get(
       name
     } = req.params;
     const imgRoute = `${year}/${month}/${day}/${name}`;
+    const ext = name.split('.')[name.split('.').length];
 
-    res.set({ 'Content-Type': 'image/png' })
-      .sendFile(`${__dirname}/${process.env.DESTINATION}/${imgRoute}`)
+    console.log();
+
+    res.set({ 'Content-Type': `image/${ext}` })
+      .sendFile(`${process.cwd()}/${process.env.DESTINATION}/${imgRoute}`)
   });
 
 app.use('/api/auth', routes.auth);
@@ -46,9 +48,10 @@ app.use('/api/push', routes.pushNotification);
 app.use('/api/upload', routes.upload);
 app.use('/api/chats', routes.chats);
 
+app.get('/', (req, res) => res.sendFile(`${__dirname}/views/index.html`));
+
 if (process.env.NODE_ENV === 'pruduction') {
   // app.get('/', (req, res) => res.send('API is running!'));
-  app.get('/', config.connectCors, (req, res) => res.sendFile(`${__dirname}/views/index.html`));
   // app.use(express.static(`${__dirname}/public/`));
 
   // app.get('/uploads', (req, res) => res.sendFile(path.join(__dirname, process.env.DESTINATION || '')));
