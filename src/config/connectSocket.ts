@@ -29,10 +29,14 @@ const connectSocket = (httpServer: Server) => {
     const index = connectionList.push(connection) - 1;
     let userId: Schema.Types.ObjectId;
 
+    console.log('Client connected');
+
     connection.on('message', async (msg: IMessage) => {
       if (msg.type !== 'utf8' || !msg.utf8Data) {
         throw new Error('Empty message');
       }
+
+      console.log('Client sent message');
 
       try {
         const data: IMsg = JSON.parse(msg.utf8Data);
@@ -72,6 +76,7 @@ const connectSocket = (httpServer: Server) => {
     connection.on('close', () => {
       connectionList.splice(index, 1);
       onlineUserSet.delete(userId);
+      console.log('Client disconnected')
     });
   });
 };
