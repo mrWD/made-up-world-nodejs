@@ -32,6 +32,8 @@ const connectSocket = (httpServer: Server) => {
     console.log('Client connected');
 
     connection.on('message', async (msg: IMessage) => {
+      console.log(msg);
+
       if (msg.type !== 'utf8' || !msg.utf8Data) {
         throw new Error('Empty message');
       }
