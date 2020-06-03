@@ -26,7 +26,7 @@ const sendPush = async (userId: UserId, message: Message) => {
       icon: 'https://cdn1.iconfinder.com/data/icons/books-23/100/book_read_magazine-01-512.png',
     });
 
-    notifiableList[0] && notifiableList.forEach((item) => {
+    notifiableList[0] && notifiableList.forEach(async (item) => {
       const subscribtion = {
         endpoint: item.endpoint,
         keys: {
@@ -35,7 +35,11 @@ const sendPush = async (userId: UserId, message: Message) => {
         },
       };
 
-      webPush.sendNotification(subscribtion, payload, options);
+      try {
+        await webPush.sendNotification(subscribtion, payload, options);
+      } catch (err) {
+        console.log(err);
+      }
     });
   } catch (err) {
     console.error('utils', err);

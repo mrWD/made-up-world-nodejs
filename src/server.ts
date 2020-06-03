@@ -44,7 +44,7 @@ app.use('/api/auth', routes.auth);
 app.use('/api/users', routes.users);
 app.use('/api/editing', routes.editing);
 app.use('/api/reading', routes.reading);
-app.use('/api/push', routes.pushNotification);
+// app.use('/api/push', routes.pushNotification);
 app.use('/api/upload', routes.upload);
 app.use('/api/chats', routes.chats);
 
