@@ -68,7 +68,7 @@ router.post('/page', async (req, res) => {
   try {
     const page = await models.Page.findOne(queryConditions).populate('owner', { login: 1 });
 
-    if (!page) {
+    if (!page || !Object.keys(queryConditions)[0]) {
       return res.status(400).json({
         error: 'There is not the page!',
       });

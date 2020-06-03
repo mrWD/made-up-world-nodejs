@@ -243,6 +243,12 @@ router.post('/publish', async (req, res) => {
     const owner = await models.User.findById(decoded.userId);
     const pages = await models.Page.find({ storyURL, owner: decoded.userId });
 
+    if (!pages[0]) {
+      return res.status(400).json({
+        error: 'There is not the story!',
+      });
+    }
+
     const ellipsis = pages[0].title.length > 100 ? '...' : '';
     const title = pages[0].title.substring(0, ellipsis ? 97 : 100);
 

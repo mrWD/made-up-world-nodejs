@@ -39,7 +39,8 @@ const connectSocket = (httpServer: Server) => {
         const decoded = await <Token>jwt.verify(data.token, process.env.SECRET_KEY as string);
         const chat = await models.Chat.findById(data.chatID);
         const members = JSON.stringify(chat?.members);
-        const recipient = JSON.parse(members).find((id: Schema.Types.ObjectId) => id !== decoded.userId);
+        const recipient = JSON.parse(members)
+          .find((id: Schema.Types.ObjectId) => id !== decoded.userId);
 
         userId = decoded.userId;
 
