@@ -48,7 +48,8 @@ app.use('/api/reading', routes.reading);
 app.use('/api/upload', routes.upload);
 app.use('/api/chats', routes.chats);
 
-app.get('/', (req, res) => res.sendFile(`${__dirname}/views/index.html`));
+app.get('/', (req, res) => res.sendFile(`${process.cwd()}/views/index.html`));
+app.use('/css', express.static('views'));
 
 if (process.env.NODE_ENV === 'pruduction') {
   // app.get('/', (req, res) => res.send('API is running!'));
