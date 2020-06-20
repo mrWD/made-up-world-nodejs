@@ -160,18 +160,27 @@ router.post('/save', async (req, res) => {
 
 router.post('/edit', async (req, res) => {
   const {
-    body: { pageId },
+    body: { pageId, storyURL },
     headers: { authorization },
   } = req;
 
   try {
-    const decoded = await <Token>jwt.verify(authorization as string, SECRET_KEY);
-    const page = await models.Page.findOne({
-      _id: pageId,
-      owner: decoded.userId,
-    });
+    const { userId: owner } = await <Token>jwt.verify(authorization as string, SECRET_KEY);
+    let page;
 
-    if (!page) {
+    if (pageId && owner) {
+      page = await models.Page.findOne({ _id: pageId, owner });
+    }
+
+    if (!pageId && storyURL && owner) {
+      const firstPage = await models.Page.findOne({ storyURL, owner });
+
+      page = {
+        title: firstPage && firstPage.title,
+      };
+    }
+
+    if (!page || !page.title) {
       return res.status(400).json({
         error: 'There is not the page!',
       });
