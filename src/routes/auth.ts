@@ -33,7 +33,7 @@ router.post('/signup', async (req, res) => {
       });
     }
 
-    bcrypt.hash(password, '', null, async (_, hash: string): Promise<void> => {
+    bcrypt.hash(password, '', null, async (_, hash: string) => {
       try {
         const newUser = await models.User.create({
           login,
