@@ -40,7 +40,22 @@ router.post('/signup', async (req, res) => {
           password: hash,
         });
 
-        res.status(200).json(newUser.id);
+        const token = jwt.sign(
+          {
+            userId: newUser._id,
+            login: newUser.login,
+            vapidKey: VAPIDKeyPublic,
+          },
+          SECRET_KEY,
+        );
+  
+        if (!token) {
+          return res.status(400).json({
+            error: 'Token is not created!',
+          });
+        }
+  
+        res.status(200).json({ token });
       } catch (err) {
         console.error(err);
 
