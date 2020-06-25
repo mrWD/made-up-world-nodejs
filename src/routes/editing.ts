@@ -180,13 +180,7 @@ router.post('/edit', async (req, res) => {
       };
     }
 
-    if (!page || !page.title) {
-      return res.status(400).json({
-        error: 'There is not the page!',
-      });
-    }
-
-    res.status(200).json(page);
+    res.status(200).json(page || {});
   } catch (err) {
     console.error(err);
 
