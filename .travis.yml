@@ -1,20 +1,20 @@
 language: node_js
 node_js:
-  - 12
+- 12
 os: linux
 dist: xenial
 branches:
   only:
-    - master
+  - master
 install:
-  - yarn
+- yarn
 script:
-  - yarn test
+- yarn test
 deploy:
   provider: heroku
   strategy: api
   api_key:
-    secure: Ke892+oRk6ULwtMdXTQ7o2bZQMziNbPey4wYq8tIZdsGbudpI/ykbUDMKChGkSG3Tark8mUAYKqqc/ZahtQ5XozWg1sSzn2diIuTom4KIE+DnXM8bmmb/R7eRcpxbNfprZ34ppN4Zo44BLTAmkFIFo8L7UAx+VxPwOfDYXnXW/x9V79FP1psxUIbtnrW94ax1I996LkqevFYcU0kylDgRyBfNlijHYO2tNNt/mvDK7MtL0zWityP7mHuTMty9Sk4HoY6ZER/JyoIZAtMCwWCAJITc47sZ/D64QnyfI7t+xP28B5rhO8lknGPrlXD0BLmDaCd/OWpYiS7/b7BRl3UidluWKR4iDKVZ9nCyFPLN3z4MWCZtRwwXNnOeVonjxU26/czfg/zsUz088ahiLbk80bI7IJ9OMMjMjepPXs4teY3FVLYya+xZ/xYmre+5TTLYnxI5dwlrT8YNZe3Df4X6rIINoFfPsh2JVuQ2DeC9FJD9c9wBLSmZbKh1E99lBM5fXaWoCetltLz77e8qOkTxev+bgmkqOwyk2bsxI74KL+urge0qxJCXzIeYGw6XU8/8Ewv+U5uXfXSHvSgBTXBro5g7uwXqeYUJzJPZuhRx/VUo+dQVQ0Chs+pUKw/j0FjdmP2z6aoEy3mASiWEtEtAk1ZNxxtSBr5DBqcFyv8+EQ=
+    secure: x0uA3H/aulfkJ5Cl7QRfGQzaYBXp0Xo1hk9taz7W5K3EW/6O20lPsv+KcZQ+9dsYCtBlDYq8hRQPaPydq7HiwGR8vRcAVpt2hI31zJNZf8rFhSyq3LHhuQZynvXErP3BmEJ0kYZ67oTb9PRm/9VwlJ6F6hGGin4cgVsjWPxHxF9m/zFwmP1LyFzZDQA2fbB114/KSGBpBYIiN+9ltrwkKujWxapl74+eV5iRi8enlhSE9PdIHD1126IlzB3XeeCm1q8I7WgDtZDK7yg14OmCR00Nj2ZpyFk06aKPGyaW6L7jJXh7rpsrdzjelr27ZgPFOhhjRJCivfArUH6LPQrkJxHVO9ibDLBQvFlsrEofHcUYlX1UmK5ih0InUNW+97t951BWtXWYKQ3BJFfG8qVpYwlRWqQRLAFwSRsY/hkouIag0yFxYcLFvLp4KJ0GjT9qk6EJLBpdV12QXxUjKmkfReF8nXqLTWEv1TbWDdbn7+L+zD/fyD5LrXKyr3DvEKZeJQigwkocolpIrkqXUOT0R0WWWXKI18RlXN4Qaf6hukLnThmTtRy8NlS+Xqurab+M8abey7KNgGQ2un3zjz/6HCJOqm002Tp7vsmoT0aI2PNLmWLTgvdV0P8ALlr3zMg4Gfarh1MJMmUJt51JlxgCewovVbUeF64VGv9zd6d9R6o=
   app: made-up-world-nodejs
   on:
     repo: mrWD/made-up-world-nodejs
