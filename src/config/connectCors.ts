@@ -5,6 +5,7 @@ const whitelist = [
   'http://192.168.0.48:5000',
   'http://localhost:8080',
   'http://192.168.0.48:8080',
+  'https://made-up-world-reactjs.herokuapp.com',
   'https://made-up-world-vuejs.herokuapp.com',
   'https://made-up-world-angular.herokuapp.com',
   'https://made-up-world-nodejs.herokuapp.com',
